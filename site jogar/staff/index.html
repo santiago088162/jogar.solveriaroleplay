@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Staff | Solvéria Roleplay</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="banner-bg"></div>
+    
+    <div class="container">
+        <div class="card">
+            <img src="../assets/logo.png" alt="Solvéria Logo" class="logo">
+            <h1>Área Staff</h1>
+            <p style="color: var(--text-dim); font-size: 14px; margin-bottom: 25px;">Identifique-se para continuar.</p>
+            
+            <div id="login-alert" class="alert alert-error">Usuário ou senha incorretos!</div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Usuário</label>
+                    <input type="text" id="username" class="form-input" placeholder="Seu usuário" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="password" class="form-input" placeholder="Sua senha" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">ENTRAR</button>
+                <a href="../index.html" class="btn btn-secondary">VOLTAR</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/staff.js"></script>
+</body>
+</html>

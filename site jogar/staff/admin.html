@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | Solvéria Roleplay</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="banner-bg"></div>
+    
+    <div class="container">
+        <div class="card">
+            <img src="../assets/logo.png" alt="Solvéria Logo" class="logo">
+            <h1>Painel Admin</h1>
+            <p style="color: var(--primary); font-weight: 600;">Bem-vindo, Welcome</p>
+            
+            <div class="server-info" style="margin-top: 20px;">
+                <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 5px;">Status Global:</p>
+                <div id="status-container" class="status-badge online">
+                    <span class="status-dot"></span>
+                    <span id="status-text">CARREGANDO...</span>
+                </div>
+            </div>
+
+            <div class="control-grid">
+                <button onclick="toggleStatus(true)" class="btn btn-on">LIGAR PAINEL</button>
+                <button onclick="toggleStatus(false)" class="btn btn-off">DESLIGAR PAINEL</button>
+            </div>
+
+            <p id="msg" style="margin-top: 15px; font-size: 13px; min-height: 20px;"></p>
+
+            <button onclick="logout()" class="btn btn-secondary" style="margin-top: 20px;">SAIR DO PAINEL</button>
+        </div>
+    </div>
+
+    <script src="../js/staff-control.js"></script>
+    <script>
+        // Check Auth
+        if (localStorage.getItem('staff_role') !== 'admin') {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

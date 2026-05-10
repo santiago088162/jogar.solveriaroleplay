@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Staff | Solvéria Roleplay</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="banner-bg"></div>
+    
+    <div class="container">
+        <div class="card">
+            <img src="../assets/logo.png" alt="Solvéria Logo" class="logo">
+            <h1>Painel Staff</h1>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Acesso Básico</p>
+            
+            <div class="server-info" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
+                <p style="font-size: 14px; color: var(--text-dim);">Status Atual do Servidor:</p>
+                <div id="status-container" class="status-badge offline">
+                    <span class="status-dot"></span>
+                    <span id="status-text">Verificando...</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: left;">
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Informações Úteis:</h3>
+                <ul style="color: var(--text-dim); font-size: 14px; list-style: none;">
+                    <li>• Regras Gerais atualizadas</li>
+                    <li>• Sistema de Tickets: Ativo</li>
+                    <li>• Logs de Eventos: Monitorando</li>
+                </ul>
+            </div>
+
+            <button onclick="logout()" class="btn btn-secondary" style="margin-top: 30px;">SAIR DO PAINEL</button>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO SUPABASE
+        const SUPABASE_URL = "SUA_URL_DO_SUPABASE";
+        const SUPABASE_KEY = "SUA_API_KEY_DO_SUPABASE";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Check Auth
+        if (localStorage.getItem('staff_role') !== 'staff') {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        async function updateStatus() {
+            const statusContainer = document.getElementById('status-container');
+            const statusText = document.getElementById('status-text');
+            try {
+                const { data, error } = await _supabase
+                    .from('server_status')
+                    .select('online')
+                    .eq('id', 1)
+                    .single();
+
+                if (data.online) {
+                    statusContainer.className = 'status-badge online';
+                    statusText.innerText = 'ONLINE';
+                } else {
+                    statusContainer.className = 'status-badge offline';
+                    statusText.innerText = 'OFFLINE';
+                }
+            } catch (e) {
+                statusText.innerText = 'ERRO';
+            }
+        }
+        updateStatus();
+        setInterval(updateStatus, 15000);
+    </script>
+</body>
+</html>
