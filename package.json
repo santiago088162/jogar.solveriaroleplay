@@ -1,0 +1,12 @@
+{
+  "name": "solveria-panel",
+  "version": "1.0.0",
+  "description": "Painel de Acesso Solvéria RP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
